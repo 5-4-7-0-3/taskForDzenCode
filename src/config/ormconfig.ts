@@ -14,7 +14,7 @@ const AppDataSource = new DataSource({
   database: process.env.TYPEORM_DATABASE,
   synchronize: false,
   logging: true,
-  entities: ['src/**/entities/*.entity.ts'],
+  entities: ['src/modules/**/entities/*.entity.ts'],
   migrations: ['src/db/migrations/*.ts'],
   migrationsRun: false,
 });

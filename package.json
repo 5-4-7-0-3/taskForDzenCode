@@ -23,7 +23,7 @@
     "migration:generate": "npm run typeorm migration:generate -- -d src/config/ormconfig.ts ./src/db/migrations/auto",
     "migration:run": "npm run typeorm migration:run -- -d src/config/ormconfig.ts",
     "migration:revert": "npm run typeorm migration:revert -- -d src/config/ormconfig.ts"
-  },
+  }, 
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",

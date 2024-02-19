@@ -2,8 +2,8 @@ import { HttpStatus, Injectable, InternalServerErrorException, NotFoundException
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import { CustomResponse, ResponseDto } from '../middlewares/responseMiddleware';
-import { CustomLogger } from '../middlewares/loggerMiddleware';
+import { CustomResponse, ResponseDto } from '../../middlewares/responseMiddleware';
+import { CustomLogger } from '../../middlewares/loggerMiddleware';
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()

@@ -3,8 +3,8 @@ import { JwtService } from '@nestjs/jwt';
 import * as argon2 from 'argon2';
 import * as dotenv from 'dotenv';
 import * as IORedis from 'ioredis';
-import { CustomResponse, ResponseDto } from '../middlewares/responseMiddleware';
-import { CustomLogger } from '../middlewares/loggerMiddleware';
+import { CustomResponse, ResponseDto } from '../../middlewares/responseMiddleware';
+import { CustomLogger } from '../../middlewares/loggerMiddleware';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/entities/user.entity';
 import { AuthDto } from './dto/auth.dto';
@@ -33,10 +33,10 @@ export class AuthService {
         private readonly jwtService: JwtService,
     ) {
         this.customLogger = new CustomLogger(AuthService.name);
-        this.redisClient = new IORedis.Redis({
-            host: process.env.REDIS_HOST || 'localhost',
-            port: parseInt(process.env.REDIS_PORT, 10) || 6379,
-        });
+        // this.redisClient = new IORedis.Redis({
+        //     host: process.env.REDIS_HOST || 'localhost',
+        //     port: parseInt(process.env.REDIS_PORT, 10) || 6379,
+        // });
     }
 
 

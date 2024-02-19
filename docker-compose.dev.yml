@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   dev:
-    container_name: dev-app-userway
+    container_name: dev-app-dzencode
     build:
       context: .
       dockerfile: Dockerfile
@@ -19,12 +19,12 @@ services:
       - postgres
       - redis
     networks:
-      - dev-network-userway
+      - dev-network-dzencode
     restart: always
 
   postgres:
     image: postgres:alpine
-    container_name: dev-postgres-userway
+    container_name: dev-postgres-dzencode
     environment:
       - POSTGRES_USER=${TYPEORM_USERNAME}
       - POSTGRES_PASSWORD=${TYPEORM_PASSWORD}
@@ -34,22 +34,22 @@ services:
     ports:
       - 5433:5433
     networks:
-      - dev-network-userway
+      - dev-network-dzencode
     restart: always
 
   redis:
     image: "redis:alpine"
-    container_name: dev-redis-userway
+    container_name: dev-redis-dzencode
     ports:
       - "6379:6379"
     volumes:
       - ./src/redis/data:/data
     networks:
-      - dev-network-userway
+      - dev-network-dzencode
     restart: always
 
 networks:
-  dev-network-userway:
+  dev-network-dzencode:
     driver: bridge
 
 volumes:
