@@ -116,7 +116,7 @@ export class AuthService {
             const accessToken = this.generateToken(user, 'access', process.env.JWT_ACCESS_SECRET);
             const refreshToken = this.generateToken(user, 'refresh', process.env.JWT_REFRESH_SECRET);
 
-            await this.saveRefreshTokenToRedis(user.id, refreshToken);
+            // await this.saveRefreshTokenToRedis(user.id, refreshToken);
 
             return { accessToken, refreshToken };
         } catch (error) {

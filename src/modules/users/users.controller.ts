@@ -9,7 +9,7 @@ export class UsersController {
   @Post()
   @UseGuards(JwtAuthGuard)
   findByUsername(@Request() req) {
-
+    
     return this.usersService.findByUsername(req.body.username);
   }
 

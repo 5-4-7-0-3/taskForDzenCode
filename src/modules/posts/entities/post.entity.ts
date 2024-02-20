@@ -20,9 +20,6 @@ export class Post {
     @Column()
     text: string;
 
-    @OneToMany(() => Comment, comment => comment.post)
-    comments: Comment[];
-
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date;
 
