@@ -1,6 +1,5 @@
 import { User } from "../../users/entities/user.entity";
-import { Comment } from "../../comments/entities/comment.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Post {
@@ -13,12 +12,12 @@ export class Post {
 
     @Column()
     homePage?: string;
-
-    @Column()
-    captcha: string;
     
     @Column()
     text: string;
+
+    @Column()
+    imgUrl: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date;

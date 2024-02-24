@@ -27,7 +27,7 @@ export class PostsService {
       const newPost = new Post();
       newPost.user = req.user['userId'];
       newPost.homePage = postDto.homePage;
-      newPost.captcha = postDto.captcha;
+      newPost.imgUrl = postDto.imgUrl;
       newPost.text = postDto.text;
       const savedPost = await this.postRepository.save(newPost);
 
@@ -102,7 +102,7 @@ export class PostsService {
       }
 
       post.homePage = updatePostDto.homePage;
-      post.captcha = updatePostDto.captcha;
+      post.imgUrl = updatePostDto.imgUrl;
       post.text = updatePostDto.text;
       const updatedPost = await this.postRepository.save(post);
 

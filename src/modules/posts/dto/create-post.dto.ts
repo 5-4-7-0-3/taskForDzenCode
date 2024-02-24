@@ -12,7 +12,7 @@ export class CreatePostDto {
 
     @IsString()
     @IsNotEmpty()
-    captcha: string;
+    imgUrl: string;
 
     @IsString()
     @IsNotEmpty()

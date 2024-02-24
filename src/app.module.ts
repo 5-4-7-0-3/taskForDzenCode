@@ -5,11 +5,17 @@ import { AuthModule } from './modules/auth/auth.module';
 import { PostsModule } from './modules/posts/posts.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import * as dotenv from 'dotenv';
+import { FilesModule } from './modules/files/files.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 dotenv.config();
 
 @Module({
   imports: [
+    MulterModule.register({
+      dest: './uploads',
+    }),
+    FilesModule,
     TypeOrmModule.forRoot({
       type: "postgres",
       host: process.env.TYPEORM_HOST,
