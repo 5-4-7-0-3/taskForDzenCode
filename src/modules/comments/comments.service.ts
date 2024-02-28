@@ -7,6 +7,7 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 import { CustomResponse, ResponseDto } from '../../middlewares/responseMiddleware';
 import { CustomLogger } from '../../middlewares/loggerMiddleware';
 import { Comment } from './entities/comment.entity';
+import { SocketService } from '../socket/socket.service';
 
 @Injectable()
 export class CommentsService {
@@ -17,6 +18,7 @@ export class CommentsService {
     @InjectRepository(Comment)
     private readonly commentsRepository: Repository<Comment>,
     private readonly customResponse: CustomResponse,
+    private readonly socketService: SocketService
 
   ) {
     this.customLogger = new CustomLogger(CommentsService.name);
@@ -30,7 +32,8 @@ export class CommentsService {
       newComment.text = commentDto.text;
 
       const savedComment = await this.commentsRepository.save(newComment);
-
+      this.socketService.sendCommentNotification(+savedComment.post, savedComment.text);
+      
       return await this.customResponse.generateResponse(
         HttpStatus.CREATED,
         savedComment,
@@ -132,4 +135,6 @@ export class CommentsService {
       throw new InternalServerErrorException(error);
     }
   }
+
+
 }

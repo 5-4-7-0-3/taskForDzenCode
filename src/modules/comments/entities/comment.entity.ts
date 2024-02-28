@@ -1,6 +1,7 @@
 import { User } from "../../users/entities/user.entity";
 import { Post } from "../../posts/entities/post.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { IsNotEmpty } from "class-validator";
 
 @Entity()
 export class Comment {
@@ -17,6 +18,7 @@ export class Comment {
     post: Post;
 
     @Column()
+    @IsNotEmpty()
     text: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

@@ -8,6 +8,7 @@ import { CustomLogger } from '../../middlewares/loggerMiddleware';
 import { CustomResponse } from '../../middlewares/responseMiddleware';
 import { Post } from './entities/post.entity';
 import { JwtStrategy } from '../auth/strategies/jwt.strategy';
+import { SocketService } from '../socket/socket.service';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { JwtStrategy } from '../auth/strategies/jwt.strategy';
     CustomLogger,
     CustomResponse,
     JwtService,
-    JwtStrategy
+    JwtStrategy,
+    SocketService
   ],
 })
 export class PostsModule { }

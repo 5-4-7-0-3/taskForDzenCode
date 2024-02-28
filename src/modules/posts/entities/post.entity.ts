@@ -1,3 +1,4 @@
+import { IsNotEmpty, IsUrl } from "class-validator";
 import { User } from "../../users/entities/user.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -11,12 +12,15 @@ export class Post {
     user: User;
 
     @Column()
+    @IsUrl({ require_tld: false })
     homePage?: string;
     
     @Column()
+    @IsNotEmpty()
     text: string;
 
     @Column()
+    @IsUrl({ require_tld: false })
     imgUrl: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

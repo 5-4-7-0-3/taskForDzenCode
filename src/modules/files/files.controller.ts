@@ -1,4 +1,4 @@
-import { Controller, Post, UseInterceptors, UploadedFile, HttpStatus, ParseFilePipe, Param, Res, Get, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { Controller, Post, UseInterceptors, UploadedFile, HttpStatus, ParseFilePipe, Param, Res, Get, NotFoundException, InternalServerErrorException, UseGuards } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { fileExists, processFile, saveFile } from 'src/middlewares/utilsUploadFiles';
@@ -6,6 +6,7 @@ import { CustomResponse, ResponseDto } from '../../middlewares/responseMiddlewar
 import { CustomLogger } from 'src/middlewares/loggerMiddleware';
 import { createReadStream } from 'fs';
 import { join } from 'path';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('files')
 export class FilesController {
@@ -15,6 +16,8 @@ export class FilesController {
   ) {
     this.customLogger = new CustomLogger(FilesController.name);
   }
+  
+  @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(
     FileInterceptor('file', {
@@ -41,6 +44,7 @@ export class FilesController {
   }
 
 
+  @UseGuards(JwtAuthGuard)
   @Get(':filename')
   async getFile(@Param('filename') filename: string, @Res() res): Promise<void> {
     try {

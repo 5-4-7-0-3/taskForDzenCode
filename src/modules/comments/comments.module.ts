@@ -8,6 +8,7 @@ import { CustomLogger } from '../../middlewares/loggerMiddleware';
 import { CustomResponse } from '../../middlewares/responseMiddleware';
 import { JwtStrategy } from '../auth/strategies/jwt.strategy';
 import { Comment } from './entities/comment.entity';
+import { SocketService } from '../socket/socket.service';
 
 
 @Module({
@@ -21,7 +22,8 @@ import { Comment } from './entities/comment.entity';
     CustomLogger,
     CustomResponse,
     JwtService,
-    JwtStrategy
+    JwtStrategy,
+    SocketService
   ],
 })
 export class CommentsModule { }

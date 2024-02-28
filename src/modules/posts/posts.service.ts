@@ -7,6 +7,7 @@ import { CustomResponse, ResponseDto } from '../../middlewares/responseMiddlewar
 import { Post } from './entities/post.entity';
 import { CustomLogger } from '../../middlewares/loggerMiddleware';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { SocketService } from '../socket/socket.service';
 
 
 @Injectable()
@@ -17,6 +18,7 @@ export class PostsService {
     @InjectRepository(Post)
     private readonly postRepository: Repository<Post>,
     private readonly customResponse: CustomResponse,
+    private readonly socketService: SocketService,
 
   ) {
     this.customLogger = new CustomLogger(PostsService.name);
@@ -133,5 +135,14 @@ export class PostsService {
       this.customLogger.error(this.remove.name, error.message);
       throw new InternalServerErrorException(error);
     }
+  }
+
+  async joinPostRoom(req: Request, postId: number): Promise<void> {
+    
+    await this.socketService.joinPostRoom(req.user['userId'], postId);
+  }
+
+  async leavePostRoom(req: Request, postId: number): Promise<void> {
+    this.socketService.leavePostRoom(req.user['userId'], postId);
   }
 }

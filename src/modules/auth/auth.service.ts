@@ -33,10 +33,10 @@ export class AuthService {
         private readonly jwtService: JwtService,
     ) {
         this.customLogger = new CustomLogger(AuthService.name);
-        // this.redisClient = new IORedis.Redis({
-        //     host: process.env.REDIS_HOST || 'localhost',
-        //     port: parseInt(process.env.REDIS_PORT, 10) || 6379,
-        // });
+        this.redisClient = new IORedis.Redis({
+            host: process.env.REDIS_HOST || 'localhost',
+            port: parseInt(process.env.REDIS_PORT, 10) || 6379,
+        });
     }
 
 
@@ -116,7 +116,7 @@ export class AuthService {
             const accessToken = this.generateToken(user, 'access', process.env.JWT_ACCESS_SECRET);
             const refreshToken = this.generateToken(user, 'refresh', process.env.JWT_REFRESH_SECRET);
 
-            // await this.saveRefreshTokenToRedis(user.id, refreshToken);
+            await this.saveRefreshTokenToRedis(user.id, refreshToken);
 
             return { accessToken, refreshToken };
         } catch (error) {

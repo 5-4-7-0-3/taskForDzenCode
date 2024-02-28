@@ -7,6 +7,7 @@ import { CommentsModule } from './modules/comments/comments.module';
 import * as dotenv from 'dotenv';
 import { FilesModule } from './modules/files/files.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { GoogleRecaptchaModule } from '@nestlab/google-recaptcha';
 
 dotenv.config();
 
@@ -16,10 +17,14 @@ dotenv.config();
       dest: './uploads',
     }),
     FilesModule,
+    GoogleRecaptchaModule.forRoot({
+      secretKey: process.env.GOOGLE_RECAPTCHA_SECRET_KEY,
+      response: req => req.headers.recaptcha,
+    }),
     TypeOrmModule.forRoot({
       type: "postgres",
       host: process.env.TYPEORM_HOST,
-      port: parseInt(process.env.TYPEORM_PORT, 10) ,
+      port: parseInt(process.env.TYPEORM_PORT, 10),
       username: process.env.TYPEORM_USERNAME,
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
