@@ -32,7 +32,7 @@ export class FilesController {
         filename: processedFile.filename,
       };
 
-      const x = await saveFile(processedFile);
+      await saveFile(processedFile);
       return this.customResponse.generateResponse(
         HttpStatus.OK,
         response,
